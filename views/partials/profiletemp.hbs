@@ -1,0 +1,300 @@
+
+
+<div class="container bootstrap snippet">
+    <div class="row">
+  		<div class="col-sm-10"><h1 style="color: blue;">שלום {{name}}</h1></div>
+    	         <h1 style="direction: rtl;">שלב העלאת נתונים</h1>
+    </div>
+    <img style="border-radius: 10%;" src={{image}} alt="" height="200px" width="200px">
+    <div class="row">
+  		<div class="col-sm-3"><!--left col-->
+      <div class="text-center">
+      </div></hr> <br>  <br>  <br>
+          <ul class="list-group" style="direction: rtl;">
+            <li  class="list-group-item text-muted" ><h5 style="color: cornflowerblue;">מצב הפרופיל</h5></li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>סטטוס</strong></span>  {{status}}</li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>כתובת מייל</strong></span> {{email}}</li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>טלפון</strong></span> {{phone}} </li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>עיר</strong></span>  {{city}}</li>
+          </ul>           
+        </div><!--/col-3-->
+    	<div class="col-sm-9">
+          <div class="tab-content">
+            <div class="tab-pane active" id="stage1" style="display: none;">
+                <hr>
+               <h5>שלב 1</h5> 
+            
+                      <div class="form-group">
+                        <h1> מצב סוציו-אקונומי</h1>
+                          <div class="col-xs-6">
+                         שכר חודשי במומצע  <br>
+                          <input type="checkbox" id="salary1" name="salary1" value="5000-7000">
+                            <label for="salary1"> 5,000-7,000 </label><br>
+                            <input type="checkbox" id="salary2" name="salary2" value="7000-10000">
+                            <label for="salary2">7,000-10,000 </label><br>
+                            <input type="checkbox" id="salary3" name="salary3" value="10000-12000">
+                            <label for="salary3"> 10,000-12,000 </label><br>
+                                <button class="button" onclick="save_salary()"> שמור</button>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                          </div>
+                      </div>
+          
+                      <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                          </div>
+                      </div>
+          
+                      <div class="form-group">
+                          <div class="col-xs-6">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                           <div class="col-xs-12">
+                                <br>
+                            </div>
+                      </div>
+
+              
+              <hr>
+              
+             </div><!--/tab-pane-->
+             
+              <hr>
+             <div class="tab-pane" id="stage2" style="display: none;">
+             <h5>שלב 2</h5>
+             <hr>
+              <h5>הלאום שלך:</h5> <br>
+                <div class="col-md-4">
+                    <input class="form-control" type="text" id="region"> 
+                </div>
+
+              <button class="button" onclick="save_region()">שמור</button>
+               
+  
+        
+               
+             </div><!--/tab-pane-->
+         
+             <div class="tab-pane" id="stage3" style="display: none;">	
+               
+               	<h5>שלב 3</h5> 
+                  <hr>
+              
+                  <form class="form" >
+                      
+                      <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                         <h4>   צילום תעודת זהות:</h4>
+                           <input type="file" class="file-upload-btn">
+                      </div>
+            
+                   <div class="form-group">
+                      
+                          <div class="col-xs-6">
+                              <h4>   מסמך תעודת יושר (אם יש )</h4>
+                              <input type="file" class="file-upload-btn">
+                          </div>
+                      </div>
+                
+                      <div class="form-group">
+                            
+                          <div class="col-xs-6">
+                            <h4>מסמך הסטוריית עבירות (אם יש)</h4> 
+                              <input type="file" class="file-upload-btn">
+                          </div>
+                      </div>
+                      <br>
+                      <div class="form-group">
+                           <div class="col-xs-12">
+                                <br>
+                            </div>
+                      </div>
+                     
+              	</form>
+                <button  class="file-upload-btnQ" onclick="savefiles()">שמור קבצים</button>
+              </div>
+              <br>
+               
+              </div><!--/tab-pane-->
+          </div><!--/tab-content-->
+   
+        </div><!--/col-9-->
+     
+</div><!--/row-->
+ 
+<script>
+var proid = sessionStorage.getItem("proid");
+var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+var urlencoded = new URLSearchParams();
+urlencoded.append("profileid", proid);
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: urlencoded,
+  redirect: 'follow'
+};
+
+fetch("/prof/getbyid", requestOptions).then((res)=>{ return res.json()}).then((data)=>{ 
+
+        sessionStorage.setItem("status",data.msg.status );
+    if(data.msg.status == 1){
+     
+        document.getElementById("stage1").style.display = "block";
+       
+    }
+      if(data.msg.status == 2){
+        document.getElementById("stage2").style.display = "block";
+
+
+    }
+      if(data.msg.status == 3){
+        document.getElementById("stage3").style.display = "block";
+    }
+      if(data.msg.status == 4){
+        document.getElementById("stage4").style.display = "block";
+    }
+    
+    
+});
+
+
+
+</script>
+<script>
+    function save_salary(){
+        var myHeaders1 = new Headers();
+        myHeaders1.append("Content-Type", "application/x-www-form-urlencoded");
+
+        var urlencoded1 = new URLSearchParams();
+        urlencoded1.append("salary", "7000");
+        urlencoded1.append("profileid", sessionStorage.getItem("proid"));
+
+        var requestOptions1 = {
+        method: 'POST',
+        headers: myHeaders1,
+        body: urlencoded1,
+        redirect: 'follow'
+        };
+
+    fetch("/prof/salary", requestOptions1).then((res)=>{ return res.json()}).then((data)=>{ 
+        
+    });
+    rundecision(); 
+
+    }
+    </script>
+    <script>
+    function save_region(){
+const region = document.getElementById("region").value;
+var myHeaders2 = new Headers();
+myHeaders2.append("Content-Type", "application/x-www-form-urlencoded");
+
+var urlencoded2 = new URLSearchParams();
+urlencoded2.append("region", region);
+urlencoded2.append("profileid", sessionStorage.getItem("proid"));
+
+var requestOptions2 = {
+  method: 'POST',
+  headers: myHeaders2,
+  body: urlencoded2,
+  redirect: 'follow'
+};
+
+
+    fetch("/prof/region", requestOptions2).then((res)=>{ return res.json()}).then((data)=>{ 
+        
+    });
+        rundecision();
+    
+ 
+    }
+</script>
+<script>
+    function rundecision(){
+     
+        var myHeaders3 = new Headers();
+        myHeaders3.append("Content-Type", "application/x-www-form-urlencoded");
+
+        var urlencoded3 = new URLSearchParams();
+        urlencoded3.append("decisionid", "sr4hhz4");
+        urlencoded3.append("profileid", sessionStorage.getItem("proid"));
+
+        var requestOptions3 = {
+        method: 'POST',
+        headers: myHeaders3,
+        body: urlencoded3,
+        redirect: 'follow'
+        };
+
+        fetch("/decision/run_manualy", requestOptions3).then((res)=>{ return res.json()}).then((data)=>{
+
+                     var myHeaders4 = new Headers();
+            myHeaders4.append("Content-Type", "application/x-www-form-urlencoded");
+            var urlencoded4 = new URLSearchParams();
+                urlencoded4.append("operation", "machine-decision: sr4hhz4 --change status to profile ");
+                urlencoded4.append("request", `from status: ${sessionStorage.getItem("status")} excute status change with profile id : ` +sessionStorage.getItem("proid"));
+                urlencoded4.append("deviceinfo", window.navigator.userAgent);
+                urlencoded4.append("response", JSON.stringify(data.msg));
+            var requestOptions4 = {
+              method: 'POST',
+              headers: myHeaders4,
+              body: urlencoded4,
+              redirect: 'follow'
+            };
+        fetch("/logs/slog", requestOptions4).then((res)=>{ return res.json()}).then((datalog)=>{ })
+         })
+        setTimeout(()=>{window.location.reload();},1000);
+           
+    }
+</script>
+
+ <script>
+            $(document).ready(function() {
+
+    
+    var readURL = function(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                //mycode!!
+                $('.avatar').attr('src', e.target.result);
+            }
+    
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    
+
+    $(".file-upload").on('change', function(){
+        readURL(this);
+    });
+});
+</script>    

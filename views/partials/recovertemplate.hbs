@@ -1,0 +1,79 @@
+
+<div class="container login__container my-5">
+        <div class="row login__row">
+            <div class="col-md-6 d-flex">
+                <img class="login__imagek align-self-center" src="https://www.freevector.com/uploads/vector/preview/28488/Businessman_Happy_Accepting_News.jpg"
+                    width="100%" alt="" />
+            </div>
+            <div class="col-md-5 d-flex">
+                <div class="align-self-center card login__card shadow-sm w-100">
+<div class="card-body">
+     <h2 class="text-muted text-center">דף התחברות</h2>
+    	  <div >
+                                <div class="form-group" >
+                                   
+                                    <input id="email" type="email" class="form-control form-control-lg" pattern="[^ @]*@[^ @]*" placeholder="הכנס את האימייל שלך" required/>
+                                </div>
+                       
+                              
+                                <div class="form-group">
+									  <button onclick="ValidateEmail() " class="btn btn-primary btn-lg btn-block my-3" > בקשת איפוס סיסמא </button>
+                                  
+                                    <div >
+                                        <span> <a href="/register">צור חשבון</a></span>
+
+                                    </div>                             
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+
+       <script>
+        function ValidateEmail() 
+{
+     const email=document.getElementById('email').value;
+ if (email.includes("@"))
+  {
+    recover();
+  }
+  else
+  {
+     alert("You have entered an invalid email address!");
+  }
+   
+}
+      
+   function recover()
+        { 
+        
+            const email=document.getElementById('email').value;
+
+                var myHeaders = new Headers();
+                myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+                var urlencoded = new URLSearchParams();
+                urlencoded.append("operation", "recover password");
+                urlencoded.append("request", email +" excute recover with email : " +email);
+                urlencoded.append("deviceinfo", window.navigator.userAgent);
+                var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: urlencoded,
+                redirect: 'follow'
+                };
+
+        
+            fetch('user/rec',{ method:'POST',body:new URLSearchParams({email})}).then((res)=>{return res.json()}).then((data)=>{
+                 urlencoded.append("response", JSON.stringify(data));
+                 fetch("/logs/slog", requestOptions).then((res)=>{ return res.json()}).then((data)=>{ })
+            })
+       
+             setTimeout(()=>{window.location.replace('/reset');},1000);
+        }
+
+
+  
+    </script>

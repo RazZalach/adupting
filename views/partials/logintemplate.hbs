@@ -1,0 +1,135 @@
+
+	{{>homepage}}
+	 <div class="container login__container my-5">
+        <div class="row login__row">
+            <div class="col-md-6 d-flex">
+                <img class="login__imagek align-self-center" src="https://www.freevector.com/uploads/vector/preview/28488/Businessman_Happy_Accepting_News.jpg"
+                    width="100%" alt="" />
+            </div>
+            <div class="col-md-5 d-flex">
+                <div class="align-self-center card login__card shadow-sm w-100">
+                    <div class="card-body"  class="text-muted text-center">
+                 
+                            <h2 class="text-muted text-center">דף הרשמה</h2>
+                       
+                             <div  style="direction: rtl;"  >
+                              
+                                    <label  for="email">אימייל:</label> 
+                                    <input id="email" type="text" class="form-control form-control-lg"  placeholder="הכנס את האימייל שלך"/>
+                                   <div >
+                                    <div>
+                                    <label  for="psw">סיסמא:</label> 
+                                    <input id="psw" type="password" name="psw" class="form-control form-control-lg"  placeholder="הכנס את הסיסמה" title="חייב להכיל לפחות ספרה אחת ואות גדולה וקטנה אחת, ולפחות 8 תווים או יותר" required/>
+                                 </div>  <br>
+                                
+                                </div>       
+                                         <h4 id="literal"></h4>
+                            </div>
+                            <div  class="text-muted text-center">
+                                <button  class="btn btn-primary" onclick="logincheck()"> התחברות</button>
+                                  <h4><a style="text-decoration:none;" href="/register"> נרשמת כבר אצלנו?</a></h4>
+                                     <h4><a style="text-decoration:none;" href="/recover"> שכחת סיסמא?</a></h4> 
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+  
+
+            
+                              
+                               
+
+
+
+
+   <script>
+                                
+  function logincheck(){
+                                                
+  const email = document.getElementById("email").value;
+  const pass = document.getElementById("psw").value;
+                                       
+   var p = pass+"";
+   flag= true;
+
+    if (p.length < 8 ||  p.search(/[a-z]/i) < 0  || p.search(/[0-9]/) < 0) {
+          flag =false;
+              document.getElementById("literal").innerHTML = "סיסמא חייבת להיות באורך 8 תווים ולהכיל אות גדולה אות קטנה ומספר ";
+             setTimeout(()=>{window.location.reload();},2000);
+        }
+        if(email== ""|| pass == "" ){
+          flag =false;
+            document.getElementById("literal").innerHTML="שדות לא יכולות להיות ריקים או מייל לא תקין ";
+            setTimeout(()=>{window.location.reload();},2000);
+        }
+
+
+        if(flag){
+          
+       
+ var myHeaders = new Headers();
+ myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+ var urlencoded = new URLSearchParams();
+ urlencoded.append("email", email);
+ urlencoded.append("userpassword", pass);
+
+ var requestOptions = {
+   method: 'POST',
+   headers: myHeaders,
+   body: urlencoded,
+   redirect: 'follow'
+ };
+
+ fetch("/user/log", requestOptions).then((res)=>{ return res.json()}).then((data)=>{
+
+            var myHeaders2 = new Headers();
+            myHeaders2.append("Content-Type", "application/x-www-form-urlencoded");
+            var urlencoded2 = new URLSearchParams();
+                urlencoded2.append("operation", "Login");
+                urlencoded2.append("request", "  excute login with email : " +email);
+                urlencoded2.append("deviceinfo", window.navigator.userAgent);
+                urlencoded2.append("response", JSON.stringify(data.msg));
+            var requestOptions2 = {
+              method: 'POST',
+              headers: myHeaders2,
+              body: urlencoded2,
+              redirect: 'follow'
+            };
+
+fetch("/logs/slog", requestOptions2).then((res)=>{ return res.json()}).then((dt)=>{ });
+    sessionStorage.setItem('uid',data.msg.userid);
+    
+
+var user_id = JSON.stringify (data.msg.userid);
+var profile_id = JSON.stringify (data.msg.profileid);
+
+  if(user_id != null){
+        if(profile_id.length == 2){
+        window.location.replace("/cprofile");
+        }
+
+        else if(profile_id.length > 2){
+          var newproid = profile_id.substring(1,profile_id.length-1);
+     
+          sessionStorage.setItem("proid",newproid);
+          var url = `/prof/getpro/profileid=${newproid}`;
+          window.location.replace(url);
+        }
+  }else{
+ document.getElementById("literal").innerHTML = data.msg;
+  setTimeout(()=>{window.location.reload();},3000);
+  }
+
+ 
+    })
+       }
+ 
+   }
+                                      
+ </script>
+      
