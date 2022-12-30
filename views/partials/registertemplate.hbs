@@ -28,7 +28,12 @@
                                 
                                    <div style=" direction: rtl;" class="form-group">
                                     <label style=" direction: rtl;" for="">עיר</label>
-                                     <input  id="city" type="text" class="form-control form-control-lg" name="city" placeholder=" עיר" title=""required >
+                                     {{!-- <select id="city" class="form-control form-control-lg" name="city" placeholder=" עיר" title=""required >
+
+                                     </select> --}}
+                                     <select id="city" name="city" class="form-control form-control-lg" >
+                                    <option value="">בחר עיר</option>
+                                    </select>
                                 </div>
                                     <div style=" direction: rtl;" class="form-group">
                                     <label style=" direction: rtl;" for="">כתובת</label>
@@ -70,6 +75,45 @@
             </div>
         </div>
     </div>
+    
+<script>
+var requestOptions = {
+  method: 'GET',
+  redirect: 'follow'
+};
+
+
+fetch("https://data.gov.il/api/3/action/datastore_search?resource_id=1b14e41c-85b3-4c21-bdce-9fe48185ffca&limit=10000000")
+  .then(response => response.json())
+  .then(data => {
+    // המרת הנתונים מתוך ה-API למערך שמכיל רק את city_name
+ const newCities = [];
+// המרת הנתונים מתוך ה-API למערך שמכיל רק את city_name
+  const cities = data.result.records.map(record => {
+  if (!newCities.includes(record.city_name)) {
+    newCities.push(record.city_name);
+    return record.city_name;
+  }
+  return '';
+  });
+
+    const cityInput = document.getElementById("city");
+    cities.forEach(city => {
+      if(city.length  > 0){
+      const option = document.createElement("option");
+     option.value = city;
+     option.text = city;
+     cityInput.appendChild(option);
+      }
+    });
+  });
+
+
+    // עדכון תיבת הקלט עם הערים החדשות
+
+
+</script>
+
 	 <script>
     var bool1 =false;
     var bool2 = false;
@@ -160,7 +204,7 @@ if (bool1 && bool2 && bool3 && bool4){
 }
 
 password.onchange = validatePassword;
-confirm_password.onkeyup = validatePassword;
+
 </script> 
 
  <script>
@@ -173,11 +217,12 @@ confirm_password.onkeyup = validatePassword;
            var Bdate = document.getElementById("Bdate").value;   
              const  Name=document.getElementById("name").value;
              const  Lastname=document.getElementById("lastname").value;
-              const  City=document.getElementById("city").value;
+              var  City=document.getElementById("city").value;
               const  Address=document.getElementById("address").value;
               const  Phone=document.getElementById("phone").value;
              const Email=document.getElementById("email").value;
              const Password=document.getElementById("psw").value;
+             City = City.trim();
              fetch('/user/reg',{
                     method: 'POST',
                     body:new URLSearchParams({

@@ -3,6 +3,7 @@ const bcrypt=require("bcrypt");
 const profiles = require('../model/profiles');
 const users=require('../model/users');
 // const jwt = require("jsonwebtoken");
+const status=require('../model/status');
 
 
     function get_random_string(length){
@@ -67,12 +68,16 @@ module.exports={
     },
     get_profile_byid:(req,res)=>{
       const profileid = req.params.profileid;
+      var total_satatus = 0;
+      status.find().then((rows)=>{
+        total_satatus = rows.length;
+      })
       var id = profileid+"";
       var arr = id.split("=");
       profiles.find({profileid:arr[1]}).then((data)=>{
        
         if(data.length > 0){
-           return res.render('profile',{name:data[0].name,image:data[0].image,city:data[0].city,phone:data[0].phone,status:data[0].status,email:data[0].email}); 
+           return res.render('profile',{name:data[0].name,image:data[0].image,city:data[0].city,phone:data[0].phone,status:data[0].status+"/"+total_satatus,email:data[0].email,lastname:data[0].lastname,d_of_birth:data[0].d_of_birth}); 
         } 
       })
     },
