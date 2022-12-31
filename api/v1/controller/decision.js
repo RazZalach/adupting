@@ -54,6 +54,7 @@ const e = require('cors');
             })
         },
        
+        
         get_all_decisions:(req,res)=>{
             decisions.find({},{_id:false}).then((data)=>{
                if(data.length > 0){

@@ -26,9 +26,6 @@ app.use(express.static(path.join(__dirname, 'uploads')));
 // הגדרת תיקייה לקבצים סטאטיים
 
 
-
-
-
 const content_us_router = require('./api/v1/route/content_us.js');
 const decision_router = require('./api/v1/route/decision.js');
 const status_router = require('./api/v1/route/status.js');

@@ -11,7 +11,6 @@ const logs = require('../model/logs');
             str+=chars[index];
         }
         return str;
-
     }
 
 module.exports={

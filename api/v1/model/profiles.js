@@ -20,3 +20,4 @@ const profile_schema=mongoose.Schema({
     created_at:String
 });
 module.exports=mongoose.model("profiles",profile_schema);
+

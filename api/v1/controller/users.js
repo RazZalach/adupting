@@ -15,9 +15,6 @@ const mongoose=require('mongoose');
         return str;
 
     }
-
-
-
 module.exports={
 
                 get_all_users:(req,res)=>{

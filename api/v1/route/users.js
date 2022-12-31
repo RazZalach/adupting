@@ -1,8 +1,6 @@
 const router = require('express').Router();
 const {get_all_users,register,login,recover_pass,reset_pass}=require("../controller/users.js");
 
-//נגדיר נקודת קצה end point
-//עבור הרשמה והתחברות
 router.get("/getall",get_all_users);
 router.post("/reg",register);
 router.post("/log",login);

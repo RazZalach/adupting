@@ -15,10 +15,6 @@ const mongoose=require('mongoose');
 
     }
 
-
-
-
-//   require('../../../emailsend').emailsend(Email.Email,subj,body);
 module.exports={
 
     contentus_ticket:(req,res)=>{

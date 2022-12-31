@@ -42,6 +42,4 @@ module.exports={
                     else return res.status(409).json({msg:0});
             })
         }
-
-
 }

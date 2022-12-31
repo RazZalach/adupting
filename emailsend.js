@@ -18,7 +18,7 @@ module.exports={
             subject,
             html:Body  
         };
-      
+    
         mailTransporter.sendMail(mailDetails, function(err, data) {
             if(err) {
                 console.log(err);

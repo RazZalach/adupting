@@ -5,9 +5,6 @@
                 <p class="text-Red-50 mb-0">למען העתיד</p>
             </div>
         </header>
-
-
-   
         <section class="py-5">
             <div class="container my-5">
                 <div class="row justify-content-center">
@@ -59,61 +56,36 @@
                 </div>
                 <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
                     <div class="col-lg-6">
-                        <!-- * * * * * * * * * * * * * * *-->
-                        <!-- * * SB Forms Contact Form * *-->
-                        <!-- * * * * * * * * * * * * * * *-->
-                        <!-- This form is pre-integrated with SB Forms.-->
-                        <!-- To make this form functional, sign up at-->
-                        <!-- https://startbootstrap.com/solution/contact-forms-->
-                        <!-- to get an API token!-->
-
-                            <!-- Name input-->
                             <div class="form-floating mb-3">
                                 <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
                                 <label style="direction: rtl;" for="name">שם מלא</label>
                                 <div class="invalid-feedback" data-sb-feedback="name:required">נדרש שם.</div>
                             </div>
-                            <!-- Email address input-->
                             <div class="form-floating mb-3">
                                 <input class="form-control" id="email" type="email" placeholder="name@example.com" data-sb-validations="required,email" />
                                 <label style=" direction: rtl;" for="email">כתובת דוא"ל</label>
                                 <div class="invalid-feedback" data-sb-feedback="email:required">יש צורך במייל.</div>
                                 <div class="invalid-feedback" data-sb-feedback="email:email">האימייל אינו חוקי.</div>
                             </div>
-                            <!-- Phone number input-->
+                         
                             <div class="form-floating mb-3"> 
                                 <input class="form-control" id="phone" type="tel" placeholder="(123) 456-7890" data-sb-validations="required" />
                                 <label style=" direction: rtl;" for="phone">מספר טלפון</label>
                                 <div class="invalid-feedback" data-sb-feedback="phone:required">יש צורך במספר טלפון.</div>
                             </div>
-                                 <div class="form-floating mb-3"> 
-                                    
+                                 <div class="form-floating mb-3">  
                                  <input type="text" id="subject_tick" class="form-control form-control-dark w-100" placeholder="חפש נושא" aria-label="Search" />
                                 <label style=" direction: rtl;" for="subject">נושא</label>
-                        
-                 
                             </div>
-                            <!-- Message input-->
                             <div class="form-floating mb-3"> 
                                 <textarea class="form-control" id="message" type="text" placeholder="Enter your message here..." style="height: 10rem" data-sb-validations="required"></textarea>
                                 <label style=" direction: rtl;" for="message">הוֹדָעָה</label>
                                 <div class="invalid-feedback" data-sb-feedback="message:required">נדרשת הודעה.</div>
                             </div>
-                            <!-- Submit success message-->
-                            <!---->
-                            <!-- This is what your users will see when the form-->
-                            <!-- has successfully submitted-->
-                            <div id="submitSuccessMessage">
-                               
-                            </div>
-                            <!-- Submit error message-->
-                            <!---->
-                            <!-- This is what your users will see when there is-->
-                            <!-- an error submitting the form-->
-                            <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
-                            <!-- Submit Button-->
-                            <div class="d-grid"><button onclick="contentus_ticket()" > צור פנייה</button></div>
-              
+                            <div id="submitSuccessMessage">                           
+                            </div>                      
+                            <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>                   
+                            <div class="d-grid"><button onclick="contentus_ticket()" > צור פנייה</button></div>           
                     </div>
                 </div>
             </div>
@@ -140,10 +112,6 @@
                     </div>
                 </div>
             </div>
-              
-            
-
-
             <script>
                 function contentus_ticket(){
                     const fullname =document.getElementById("name").value; 
@@ -179,11 +147,6 @@ fetch("/tick/ticket", requestOptions).then((res)=>{return res.json()}).then((dat
  
 }
             </script>
-
-
-
-
-
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
     <script src="/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
