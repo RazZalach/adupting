@@ -1,5 +1,51 @@
 
  {{>homepage}} 
+
+  <script> 
+
+    const userid = sessionStorage.getItem("uid");
+ 
+    if(userid == null){
+      alert("you must sign in first!!! ");
+      window.location.replace("/login");
+
+    }
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+        var urlencoded = new URLSearchParams();
+        urlencoded.append("userid", userid);
+
+
+        var requestOptions = {
+          method: 'POST',
+          headers: myHeaders,
+          body: urlencoded,
+          redirect: 'follow'
+        };
+          var myHeaders2 = new Headers();
+            myHeaders2.append("Content-Type", "application/x-www-form-urlencoded");
+            var urlencoded2 = new URLSearchParams();
+                urlencoded2.append("operation", "createprofile - stg1");
+                urlencoded2.append("request", " excute create profile with user id: "+userid);
+                urlencoded2.append("deviceinfo", window.navigator.userAgent);
+               
+            var requestOptions2 = {
+              method: 'POST',
+              headers: myHeaders2,
+              body: urlencoded2,
+              redirect: 'follow'
+            };
+            fetch("/prof/create", requestOptions).then((res)=>{ return res.json()}).then((data)=>{
+              var profile_id = data.msg;
+                  sessionStorage.setItem("proid",profile_id);
+              urlencoded2.append("response", JSON.stringify(data.msg)); 
+            fetch("/logs/slog", requestOptions2).then((res)=>{ return res.json()}).then((data2)=>{})
+            })
+
+    
+
+   </script>
   <div class="container login__container my-5">
         <div class="row login__row">
             <div class="col-md-6 d-flex">
@@ -9,12 +55,22 @@
             <div class="col-md-5 d-flex">
                 <div class="align-self-center card login__card shadow-sm w-100">
                     <div class="card-body"  class="text-muted text-center">
-                            <h4 class="text-right">שלום  שלב העלאת תמונה </h4>
+                            <h4 class="text-right">  שלב העלאת תמונה </h4>
                             </div>
-                            <div  class="text-muted text-center">
-                                <h4>הכנס את הקישור כאן </h4>
-                                <input type="text" placeholder="url" id="url">
-                                <button class="button" onclick="save()"><span>Save Image</span></button>
+                         <form action="/upload" method="post" enctype="multipart/form-data">
+                              <script>
+            const userid2 = sessionStorage.getItem('uid'); 
+            const input1 = `<input type="hidden" value="${userid2}" placeholder="${userid2}" id="filename" name="filename" >`;
+              document.querySelector('form').innerHTML += input1;
+        </script>
+            <input type="file" name="files" class="btn btn-primary" id="file" multiple>
+            <br>
+            <br>
+            <button class="btn btn-primary" type="submit" style="border-radius: 4px; margin-left: 30%;">
+              העלה תמונת פרופיל
+            </button>
+        </form>
+   
                         </div>
                         </div>
                     </div>
@@ -22,67 +78,8 @@
             </div>
         </div>
     </div>
-  
- <script> 
+    {{>footertemp}}
 
-
-   function save(){
-    const userid = sessionStorage.getItem("uid");
-    if(userid == null){
-      alert("you must sign in first!!! ");
-      window.location.replace("/login");
-
-    }else{
-
-   
-    const image = document.getElementById("url").value; 
-    var myHeaders = new Headers();
-myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
-
-var urlencoded = new URLSearchParams();
-urlencoded.append("userid", userid);
-urlencoded.append("image", image);
-
-var requestOptions = {
-  method: 'POST',
-  headers: myHeaders,
-  body: urlencoded,
-  redirect: 'follow'
-};
-          var myHeaders2 = new Headers();
-            myHeaders2.append("Content-Type", "application/x-www-form-urlencoded");
-            var urlencoded2 = new URLSearchParams();
-                urlencoded2.append("operation", "createprofile - stg1");
-                urlencoded2.append("request", " excute create profile with user id: "+userid+" link image: "+image);
-                urlencoded2.append("deviceinfo", window.navigator.userAgent);
-               
-            var requestOptions2 = {
-              method: 'POST',
-              headers: myHeaders2,
-              body: urlencoded2,
-              redirect: 'follow'
-            };
- 
-
-
-
-fetch("/prof/create", requestOptions).then((res)=>{ return res.json()}).then((data)=>{
-  var profile_id = data.msg;
-  alert( profile_id);
-
-      sessionStorage.setItem("proid",profile_id);
-         var url = `/prof/getpro/profileid=${profile_id}`;
-         window.location.replace(url);
-   urlencoded2.append("response", JSON.stringify(data.msg)); 
-fetch("/logs/slog", requestOptions2).then((res)=>{ return res.json()}).then((data2)=>{
-})
-
-  })
-
-   
-   }
-    }
-   </script>
 
 
 

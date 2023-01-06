@@ -22,7 +22,7 @@ const status=require('../model/status');
 module.exports={
 
     create_profile_stg1:(req,res)=>{
-        const {userid,image}=req.body;
+        const {userid}=req.body;
 
         const profileid = get_random_string(5);
         const created_at = Date(Date.now()).toString();
@@ -32,7 +32,7 @@ module.exports={
           if ( rows.length == 0 ) {
          const newprofile = new profiles({
            _id:new mongoose.Types.ObjectId(),
-           profileid:profileid,userid,name:userdata[0].name,lastname:userdata[0].lastname,d_of_birth:userdata[0].d_of_birth,phone:userdata[0].phone,city:userdata[0].city,address:userdata[0].address,email:userdata[0].email,created_at,image,
+           profileid:profileid,userid,name:userdata[0].name,lastname:userdata[0].lastname,d_of_birth:userdata[0].d_of_birth,phone:userdata[0].phone,city:userdata[0].city,address:userdata[0].address,email:userdata[0].email,created_at,
            status:1
          });
          newprofile.save().then((data)=>{ 
@@ -71,15 +71,17 @@ module.exports={
       var total_satatus = 0;
       status.find().then((rows)=>{
         total_satatus = rows.length;
+        console.log(total_satatus);
+        var id = profileid+"";
+        var arr = id.split("=");
+        profiles.find({profileid:arr[1]}).then((data)=>{
+         console.log(data[0].status+"/"+total_satatus);
+          if(data.length > 0){
+             return res.render('profile',{name:data[0].name,image:data[0].image,city:data[0].city,phone:data[0].phone,status:data[0].status+"/"+total_satatus,email:data[0].email,lastname:data[0].lastname,d_of_birth:data[0].d_of_birth}); 
+          } 
+        })
       })
-      var id = profileid+"";
-      var arr = id.split("=");
-      profiles.find({profileid:arr[1]}).then((data)=>{
-       
-        if(data.length > 0){
-           return res.render('profile',{name:data[0].name,image:data[0].image,city:data[0].city,phone:data[0].phone,status:data[0].status+"/"+total_satatus,email:data[0].email,lastname:data[0].lastname,d_of_birth:data[0].d_of_birth}); 
-        } 
-      })
+     
     },
     updatesalary:(req,res)=>{
       const {salary,profileid }= req.body;

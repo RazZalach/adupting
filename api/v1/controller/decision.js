@@ -119,7 +119,7 @@ const e = require('cors');
                           
                                   
                             }
-                    
+
 
                             else if(data[0].status == 2 && data[0].region != null){
                             
@@ -130,6 +130,31 @@ const e = require('cors');
                                         }
                                     })
                             }
+                            else if(data[0].status == 3 ){
+                                profiles.updateOne({profileid:profileid},{$set:{status:4}}).then((effect)=>{
+                                    if(effect.modifiedCount > 0){
+                       
+                                        return res.status(200).json({msg:1});
+                                    }
+                                })
+                            }
+                            else if(data[0].status == 4 ){
+                                profiles.updateOne({profileid:profileid},{$set:{status:5}}).then((effect)=>{
+                                    if(effect.modifiedCount > 0){
+                       
+                                        return res.status(200).json({msg:1});
+                                    }
+                                })
+                            }
+                            else if(data[0].status == 5 ){
+                                profiles.updateOne({profileid:profileid},{$set:{status:6}}).then((effect)=>{
+                                    if(effect.modifiedCount > 0){
+                       
+                                        return res.status(200).json({msg:1});
+                                    }
+                                })
+                            }
+
                             else{
                           
                                 return res.status(200).json({msg:"all done!"});

@@ -1,0 +1,155 @@
+<html>
+  <head>
+    
+<style>
+    *{
+        
+  padding: 0;
+  margin: 0;
+  font-family: sans-serif;
+}
+body{
+  background: #002f5f;
+}
+.container{
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 100%;
+}
+.container span{
+  text-transform: uppercase;
+  display: block;
+}
+.mytext1{
+  color: white;
+  font-size: 60px;
+  font-weight: 700;
+  letter-spacing: 8px;
+  margin-bottom: 20px;
+  background: #002f5f;
+  position: relative;
+  animation: text 3s 1;
+
+}
+.mytext2{
+  font-size: 30px;
+    color: #E91E63;
+    font-weight: bold;
+    font-family: cursive;
+}
+@keyframes text {
+  0%{
+    letter-spacing: 5px;
+    margin-bottom: -40px;
+
+  }
+  30%{
+    letter-spacing: 13px;
+    margin-bottom: -40px;
+
+  }
+    60%{
+    letter-spacing: 10px;
+    margin-bottom: -40px;
+
+  }
+  85%{
+    letter-spacing: 8px;
+    margin-bottom: -40px;
+
+  }
+}
+</style>
+    <title>אימות נתונים</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+  <span class="mytext1">הנתונים שלך עוברים אימות </span>
+  <progress value="0" max="100" id="progressBar"></progress>
+    
+  <br>
+  <br>
+  <br>
+    <p class="mytext2" id="progressText">0%</p>
+</div>
+
+    
+    
+    <br>
+ <script>
+  
+ if(sessionStorage.getItem("status")==3 || 4 || 5){
+    sessionStorage.setItem('status',sessionStorage.getItem(status));
+
+  
+        var myHeaders3 = new Headers();
+        myHeaders3.append("Content-Type", "application/x-www-form-urlencoded");
+
+        var urlencoded3 = new URLSearchParams();
+        urlencoded3.append("decisionid", "sr4hhz4");
+        urlencoded3.append("profileid", sessionStorage.getItem("proid"));
+
+        var requestOptions3 = {
+        method: 'POST',
+        headers: myHeaders3,
+        body: urlencoded3,
+        redirect: 'follow'
+        };
+
+        fetch("/decision/run_manualy", requestOptions3).then((res)=>{ return res.json()}).then((data)=>{
+
+                     var myHeaders4 = new Headers();
+            myHeaders4.append("Content-Type", "application/x-www-form-urlencoded");
+            var urlencoded4 = new URLSearchParams();
+                urlencoded4.append("operation", "machine-decision: sr4hhz4 --change status to profile ");
+                urlencoded4.append("request", `from status: ${sessionStorage.getItem("status")} excute status change with profile id : ` +sessionStorage.getItem("proid"));
+                urlencoded4.append("deviceinfo", window.navigator.userAgent);
+                urlencoded4.append("response", JSON.stringify(data.msg));
+            var requestOptions4 = {
+              method: 'POST',
+              headers: myHeaders4,
+              body: urlencoded4,
+              redirect: 'follow'
+            };
+        fetch("/logs/slog", requestOptions4).then((res)=>{ return res.json()}).then((datalog)=>{ })
+         })
+    
+ }
+
+
+
+ </script>
+    
+    <script>
+        var num = 0;
+      function updateProgress(percentage) {
+        document.getElementById("progressBar").value = percentage;
+        document.getElementById("progressText").innerHTML = percentage + "%";
+      }
+      
+      for (let i = 0; i <= 100; i++) {
+        setTimeout(function() {
+          updateProgress(i);
+        },50 * i);
+      }
+             setTimeout(function() {
+        var profile_id = sessionStorage.getItem('proid');
+        var url = `/prof/getpro/profileid=${profile_id}`;
+         window.location.replace(url);
+             },5000);
+      
+
+
+    </script>
+
+ 
+  </body>
+</html>
+  

@@ -3,11 +3,11 @@ require('dotenv').config();
 const express=require('express');
 const app=express();
 const cors=require('cors');
-const multer=require('multer');
 const mongoose=require('mongoose');
 const uri=process.env.CON_STR;
 mongoose.connect(uri,{useNewUrlParser:true,useUnifiedTopology:true}).then(()=>{console.log("mongo db connected ")});
-
+const multer  = require('multer');
+const fs  = require('fs');
 
 
 
@@ -32,11 +32,10 @@ const status_router = require('./api/v1/route/status.js');
 const user_router = require('./api/v1/route/users.js');
 const profile_router = require('./api/v1/route/profile.js');
 const logs_router = require('./api/v1/route/logs.js');
-const { query } = require('express');
 
 
 
-
+app.use('/images', express.static(path.join(__dirname, 'uploads')));
 
 
 app.use("/decision",decision_router);
@@ -47,6 +46,12 @@ app.use("/logs",logs_router);
 app.use("/status",status_router);
 
 
+
+
+
+
+
+
 app.get('/cprofile',(req,res)=>{
     res.render('createprofile');   
    
@@ -55,7 +60,10 @@ app.use("/test",(req,res)=>{
   res.render("test");
 })
 
-
+app.get('/negishot',(req,res)=>{
+    res.render('negishotv');   
+   
+})
 
 app.get('/login',(req,res)=>{
     res.render('login');   
@@ -88,14 +96,46 @@ app.get('/about',(req,res)=>{
 });
 
 
+var storage = multer.diskStorage({
+  destination: function (req, file, callback) {
+      var dir = './uploads';
+      if (!fs.existsSync(dir)){
+          fs.mkdirSync(dir);
+      }
+      callback(null, dir);
+  },
+  filename: function (req, file, callback) {
+    console.log( req.body.filename);
+   
+    if( req.body.filename+"".length > 6){
+      
+      var str = file.originalname +"";
+      var extension = str.split('.');
+        callback(null, req.body.filename+'.'+extension[1]);
+    }
+
+        var str = file.originalname +"";
+        var extension = str.split('.');
+        callback(null,  req.body.filename +'.'+extension[1]);
+
+  }
+});
+var upload = multer({storage: storage}).array('files', 12);
+app.post('/upload', function (req, res, next) {
+ 
+  
+    upload(req, res, function (err) {
+      
+        if (err) {
+            return res.send("Something went wrong:(");
+        } 
+       
+       return res.render("confirm");
+        
+    });
+})
 
 
-
-// // קבצים שאינם עוברים עיבוד בשרת
-
-
-// // המשימה ליצור דף רספונסיבי מבוסס בוטסטראפ בשם index.html
-// // כל קבצי ה CSS / JS הרלונטיים יהיהו בתוך הפרויקט
 
 
 

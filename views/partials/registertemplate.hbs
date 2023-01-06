@@ -1,4 +1,8 @@
+<!-- ייבוא ספריית jQuery UI -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
+<!-- ייבוא ספריית ה־CSS של jQuery UI -->
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	 {{>homepage}}
 	 <div class="container login__container my-5">
         <div class="row login__row">
@@ -75,6 +79,7 @@
             </div>
         </div>
     </div>
+     {{>footertemp}}
     
 <script>
 var requestOptions = {
@@ -98,6 +103,8 @@ fetch("https://data.gov.il/api/3/action/datastore_search?resource_id=1b14e41c-85
   });
 
     const cityInput = document.getElementById("city");
+    const collator = new Intl.Collator('he');
+    cities.sort(collator.compare);
     cities.forEach(city => {
       if(city.length  > 0){
       const option = document.createElement("option");
@@ -110,8 +117,16 @@ fetch("https://data.gov.il/api/3/action/datastore_search?resource_id=1b14e41c-85
 
 
     // עדכון תיבת הקלט עם הערים החדשות
+    
 
 
+</script>
+<script>
+      $(function() {
+  // קריאה ל־autocomplete על־תיבת ה־select
+  $("#city").autocomplete({
+    source: cities // מערך הערים המקורי
+  });
 </script>
 
 	 <script>
