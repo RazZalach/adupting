@@ -38,7 +38,7 @@ const manager_router = require('./api/v1/route/managers.js');
 
 
 app.use('/images', express.static(path.join(__dirname, 'uploads')));
-
+app.use('/scripts',express.static(path.join(__dirname,'uploads')));
 
 app.use("/decision",decision_router);
 app.use("/tick",content_us_router);
