@@ -16,43 +16,43 @@
                  
                             <h2 class="text-muted text-center">דף הרשמה</h2>
                        
-                            <div class="">
-                                <div style=" direction: rtl;" class="form-group">
-                                    <label style=" direction: rtl;" for="">אימייל:</label>
+                            <div style="direction: rtl;">
+                                <div  class="form-group">
+                               
                                     <input id="email" type="email" class="form-control form-control-lg" pattern="[^ @]*@[^ @]*"  placeholder="הכנס את האימייל שלך" required>
                                 </div>
-                                <div style=" direction: rtl;" class="form-group">
-                                    <label style=" direction: rtl;" for="">שם פרטי</label>
+                                <div  class="form-group">
+                                 
                                      <input  id="name" type="text" class="form-control form-control-lg" name="fullname" placeholder="שם מלא" title=""required >
                                 </div>
-                                   <div style=" direction: rtl;" class="form-group">
-                                    <label style=" direction: rtl;" for="">שם משפחה</label>
+                                   <div  class="form-group">
+                                 
                                      <input  id="lastname" type="text" class="form-control form-control-lg" name="fullname" placeholder="שם מלא" title=""required >
                                 </div>
                                 
-                                   <div style=" direction: rtl;" class="form-group">
-                                    <label style=" direction: rtl;" for="">עיר</label>
+                                   <div  class="form-group">
+                              
                                      {{!-- <select id="city" class="form-control form-control-lg" name="city" placeholder=" עיר" title=""required >
 
                                      </select> --}}
                                      <select id="city" name="city" class="form-control form-control-lg" >
-                                    <option value="">בחר עיר</option>
+                                      <option value=""> בחר עיר</option>
                                     </select>
                                 </div>
-                                    <div style=" direction: rtl;" class="form-group">
-                                    <label style=" direction: rtl;" for="">כתובת</label>
-                                     <input  id="address" type="text" class="form-control form-control-lg" name="address" placeholder=" כתובת" title="" required>
+                                    <div  class="form-group">
+                                
+                                     <input  id="address" type="text" class="form-control form-control-lg" name="address" placeholder="רחוב" title="" required>
                                 </div>
-                                <div style=" direction: rtl;" class="form-group">
-                                    <label style=" direction: rtl;" for="">טלפון נייד</label>
+                                <div  class="form-group">
+                                
                                      <input  id="phone" type="text" class="form-control form-control-lg" pattern="/^0\d([\d]{0,1})([-]{0,1})\d{7}$/" name="phone" placeholder=" טלפון" title=""required >
                                 </div>
-                                    <div style=" direction: rtl;" class="form-group">
-                                      <div class="col-md-12"><label class="labels">תאריך לידה</label><input id="Bdate" type="date" class="form-control form-control-lg" placeholder="תאריך לידה" required ></div>
+                                    <div  class="form-group">
+                                   <input id="Bdate" type="date" class="form-control form-control-lg" placeholder="תאריך לידה" required >
                                      
                                 </div>
-                                   <div style=" direction: rtl;" class="form-group">
-                                    <label style=" direction: rtl;" for="">סיסמה:</label>
+                                   <div  class="form-group">
+                                  
                                      <input  id="psw" type="password" class="form-control form-control-lg" name="psw" placeholder="הכנס את הסיסמה" title="חייב להכיל לפחות ספרה אחת ואות גדולה וקטנה אחת, ולפחות 8 תווים או יותר" required>
                                 </div>
                               
@@ -79,7 +79,7 @@
             </div>
         </div>
     </div>
-     {{>footertemp}}
+ 
     
 <script>
 var requestOptions = {
@@ -127,6 +127,7 @@ fetch("https://data.gov.il/api/3/action/datastore_search?resource_id=1b14e41c-85
   $("#city").autocomplete({
     source: cities // מערך הערים המקורי
   });
+      })
 </script>
 
 	 <script>

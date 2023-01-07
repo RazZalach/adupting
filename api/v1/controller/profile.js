@@ -20,6 +20,11 @@ const status=require('../model/status');
     }
 
 module.exports={
+  delete_all_profiles:(req,res)=>{
+    profiles.deleteMany({}).then(()=>{
+        return res.status(200).json({msg:"delet all profiles!"})
+    })
+},
 
     create_profile_stg1:(req,res)=>{
         const {userid}=req.body;

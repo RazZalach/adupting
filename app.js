@@ -8,6 +8,7 @@ const uri=process.env.CON_STR;
 mongoose.connect(uri,{useNewUrlParser:true,useUnifiedTopology:true}).then(()=>{console.log("mongo db connected ")});
 const multer  = require('multer');
 const fs  = require('fs');
+const auth = require('./api/v1/middlewares/auth');
 
 
 
@@ -32,6 +33,7 @@ const status_router = require('./api/v1/route/status.js');
 const user_router = require('./api/v1/route/users.js');
 const profile_router = require('./api/v1/route/profile.js');
 const logs_router = require('./api/v1/route/logs.js');
+const manager_router = require('./api/v1/route/managers.js');
 
 
 
@@ -44,13 +46,16 @@ app.use("/prof",profile_router);
 app.use("/user",user_router);
 app.use("/logs",logs_router);
 app.use("/status",status_router);
+app.use("/manager",manager_router);
 
 
+app.get('/loginwm',(req,res)=>{
+  res.render('loginwm');
+})
 
-
-
-
-
+app.get('/wm',auth,(req,res)=>{
+  res.render('wm');
+})
 
 app.get('/cprofile',(req,res)=>{
     res.render('createprofile');   

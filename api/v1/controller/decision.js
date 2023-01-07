@@ -107,8 +107,8 @@ const e = require('cors');
                     profiles.find({profileid}).then((data)=>{
 
                         if(data.length > 0){
-     
-                            if(data[0].status == 1 && data[0].salary > 0){
+                                console.log(data[0].salary);
+                            if(data[0].status == 1 && data[0].salary != null){
      
                                     profiles.updateOne({profileid},{$set:{status:2}}).then((effect)=>{
                              

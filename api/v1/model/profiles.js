@@ -15,7 +15,7 @@ const profile_schema=mongoose.Schema({
     email:String,
     employment:String,
     status:Number,
-    salary:Number,
+    salary:String,
     image:String,
     created_at:String
 });

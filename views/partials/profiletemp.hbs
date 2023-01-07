@@ -1,10 +1,31 @@
 
-
+<style>
+  .sim{
+    border: 4px solid rgb(0, 0, 0);
+    border-radius: 8%;
+    background-color:blanchedalmond;
+    margin-left: 15%;
+ 
+  }
+  .raz{
+   
+       text-align: center;
+    text-align: justify;
+    margin-left: 10%;
+  }
+  .raz h6{
+   
+    font-style: italic;
+    font-size: 16px;
+  }
+  .raz button{
+    border-radius: 4px;
+  }
+</style>
 <div class="container bootstrap snippet" >
   <div style="display: flex; ">
     <div class="row">
-  		<div id="img" class="col-sm-10"><h1 style="color: blue;">שלום {{name}} {{lastname}}</h1></div>
-    	         
+  		<div id="img" class="col-sm-10"><h1 style="color: blue;">שלום {{name}} {{lastname}}</h1></div>      
     </div>
     <script>
  
@@ -13,94 +34,52 @@
       const input1 =  `<img style="border-radius: 10%;" src="/images/${userid}.jpg" alt="" height="200px" width="200px"> `;
     document.getElementById('img').innerHTML += input1;
     </script>
-  <div class="tab-content" style="margin-left:35% ;">
-            <div class="tab-pane active" id="stage1" style="display: none;">
-              
-               <h5>שלב 1</h5> 
-            
+    <div class="sim">
+  <div class="tab-content" >    
+            <div class="tab-pane active" id="stage1" style=" display: none; ">
+              <div class="raz">
+               <h3>שלב 1</h3> 
                       <div class="form-group">
                         <h1> מצב סוציו-אקונומי</h1>
                           <div class="col-xs-6">
-                         שכר חודשי במומצע  <br>
-                          <input type="checkbox" id="salary1" name="salary1" value="5000-7000">
+                            <h6> עליך לבחור כמה אתה מרוויח במומצע בכל חודש מבין האפשרויות לפניך</h6>
+                           <br>
+                          <input type="radio" id="salary1" name="salary" value="5000-7000">
                             <label for="salary1"> 5,000-7,000 </label><br>
-                            <input type="checkbox" id="salary2" name="salary2" value="7000-10000">
+                            <input type="radio" id="salary2" name="salary" value="7000-10000">
                             <label for="salary2">7,000-10,000 </label><br>
-                            <input type="checkbox" id="salary3" name="salary3" value="10000-12000">
+                            <input type="radio" id="salary3" name="salary" value="10000-12000">
                             <label for="salary3"> 10,000-12,000 </label><br>
                                 <button class="button" onclick="save_salary()"> שמור</button>
                           </div>
                       </div>
-                      <div class="form-group">
-                          
-                          <div class="col-xs-6">
-                          </div>
-                      </div>
-          
-                      <div class="form-group">
-                          
-                          <div class="col-xs-6">
-                          </div>
-                      </div>
-          
-                      <div class="form-group">
-                          <div class="col-xs-6">
-                          </div>
-                      </div>
-                      <div class="form-group">
-                          
-                          <div class="col-xs-6">
-                          </div>
-                      </div>
-                      <div class="form-group">
-                          
-                          <div class="col-xs-6">
-                          </div>
-                      </div>
-                      <div class="form-group">
-                          
-                          <div class="col-xs-6">
-                          </div>
-                      </div>
-                      <div class="form-group">
-                          
-                          <div class="col-xs-6">
-                          </div>
-                      </div>
-                      <div class="form-group">
-                           <div class="col-xs-12">
-                                <br>
-                            </div>
-                      </div>
-
-              
-              
-              
-             </div><!--/tab-pane-->
-             
-              
-             <div class="tab-pane" id="stage2" style="display: none;">
-             <h2>שלב 2</h2> <br>
-           
+             <!--/tab-pane-->
+            </div>
+                </div>
+             <div class="tab-pane" id="stage2" style="display: none; margin-left: 30%;" >
+              <div class="raz">
+             <h2 >שלב 2</h2> <br>
+            <h6>בשלב זה עליך לבחור את הלאום אליו אתה משתייך </h6>
               <h5>הלאום שלך:</h5> 
                 <div class="col-md-12">
-                    <select style="width: 100px;" id="region">
+                    <select style="width: 150px;" id="region">
                       <option value=""> בחר לאום</option>
                       <option value="יהודי">יהודי</option>
                       <option value="מוסלמי">מוסלמי</option>
                       <option value="נוצרי">נוצרי</option>
                     </select>
                 </div>
-<br>
-<br>
+          <br>
+          <br>
               <button class="button" onclick="save_region()">שמור</button>
                
-  
+            </div>
         
                
              </div><!--/tab-pane-->
          
              <div class="tab-pane" id="stage3" style="display: none;">	
+              <div class="raz">
                 <h1 >שלב העלאת נתונים</h1>
                	<h5>שלב העלאת צילום תעודת זהות </h5> 
                 <p>שים לב שצילום תעודת הזהות חשוב למערכת כדי לאמת את הנתונים שלך 
@@ -117,28 +96,31 @@
             const input2 = `<input type="hidden" value="${fname}" id="filename" name="filename" >`;
               document.querySelector('form').innerHTML += input2;
            </script>
-            <input type="file" name="files" class="btn btn-primary" id="file" multiple><br>
+            <input type="file" name="files" class="btn btn-primary" id="file1" onchange="checkFile('file1')"  multiple><br>
+
             
-            <button class="btn btn-primary" type="submit" style="border-radius: 4px;">
+            <button class="btn btn-primary" type="submit"  onclick="return checkFile('file1')">
                 העלה תעודת זהות
             </button>
-        </form>
 
+        </form>
+</div>
    
            
               </div>
-            
 
                 <div class="tab-pane" id="stage4" style="display: none;">
+                  <div class="raz">
                   <h1 >שלב העלאת נתונים</h1>
                        	<h5>שלב העלאת תלוש משכורת </h5> 
-                <p>שים לב שמסמך תלוש המשכורת מהווה אימות לשכר אותו אתה מרוויח במומצע בחודש 
+                <p >שים לב שמסמך תלוש המשכורת מהווה אימות לשכר אותו אתה מרוויח במומצע בחודש 
                   <br>
                   שים לב שהקובץ קריא ואמין 
                 </p>
-                
+                  <h6> עליך לספק מסמך כמו תלוש משכורת או כל מסמך אחר שיתן תמונת מצב בנוגע לרקע הכלכלי שלך </h6>
       
            <form id="form2" action="/upload" method="post" enctype="multipart/form-data">
+     
            <script> 
             
                  const profileid3 = sessionStorage.getItem('proid'); 
@@ -149,16 +131,17 @@
             const input3 = `<input type="hidden" value="${fname2}" id="filename" name="filename" >`;
               document.getElementById('form2').innerHTML += input3;
            </script>
-            <input type="file" name="files" class="btn btn-primary" id="file" multiple><br>
+            <input type="file" name="files" class="btn btn-primary" id="file2" onchange="checkFile('file2')" multiple><br>
             
-            <button class="btn btn-primary" type="submit" style="border-radius: 4px;">
+            <button class="btn btn-primary" type="submit" style="border-radius: 4px;" onclick="return checkFile('file2')">
              העלאת קובץ
             </button>
         </form>
+        </div>
                 </div>
 
-
                 <div class="tab-pane" id="stage5" style="display: none;">
+                  <div class="raz">
                    <h1 >שלב העלאת נתונים</h1>
                 <h5>שלב העלאה רקע פלילי </h5> 
                 <p>שים לב שמסמך רקע פלילי מהווה אימות  
@@ -177,9 +160,9 @@
             const input4 = `<input type="hidden" value="${fname4}" id="filename" name="filename" >`;
               document.getElementById('form3').innerHTML += input4;
            </script>
-            <input type="file" name="files" class="btn btn-primary" id="file" multiple><br>
+            <input type="file" name="files" class="btn btn-primary" id="file3" onchange="checkFile('file3')" multiple><br>
             
-            <button class="btn btn-primary" type="submit" style="border-radius: 4px;">
+            <button class="btn btn-primary" type="submit" style="border-radius: 4px;" onclick="return checkFile('file3')">
              העלאת קובץ
             </button>
                   
@@ -189,11 +172,11 @@
     
 
 
-
+            </div>
                 </div>
 
                <div class="tab-pane" id="stage6" style="display: none;">
-            
+          
                
                     <h1>{{name}} {{lastname}} שים לב !!</h1>
                     <p style="font-size: larger; font-weight:bold; ">הפרופיל שלך כרגע בשלבי אימות!
@@ -202,16 +185,12 @@
 אנא התעדכן במייל מעת לעת </p>
                     <a class="button" style="text-decoration: none; color:white" href="/about#contact">צור קשר במידה ומשהו לא ברור</a>
                     </div>
-                  
+                  </div>
  
-  
-    </div> 
+  </div> 
     </div>
-
- <div >
-      
- </div>
-    <div class="row">
+    
+  <div class="row">
   		<div class="col-sm-3"><!--left col-->
       <div class="text-center">
       </div></hr> <br>  <br>  <br>
@@ -224,23 +203,26 @@
             <li class="list-group-item text-right"><span class="pull-left"><strong>תאריך לידה</strong></span> {{d_of_birth}} </li>
         
           </ul>
-       
+          <br>  <br>
         </div><!--/col-3-->
+     
   
    
   </section>
-                </div>
+    </div>
 
                 
-              </div>
-    	<div class="col-sm-9">
-         
-          </div><!--/tab-content-->
-   
-        </div><!--/col-9-->
-     
-</div><!--/row-->
+</div>
 
+   
+      <script>
+                function checkFile(name) {
+                  if (document.getElementById(name).value == "") {
+                      alert("נא לבחור קובץ להעלאה");
+                      return false;
+                  }
+                }
+            </script>
  
 <script>
 var proid = sessionStorage.getItem("proid");
@@ -290,7 +272,14 @@ fetch("/prof/getbyid", requestOptions).then((res)=>{ return res.json()}).then((d
         myHeaders1.append("Content-Type", "application/x-www-form-urlencoded");
 
         var urlencoded1 = new URLSearchParams();
-        urlencoded1.append("salary", "7000");
+       var options = document.getElementsByName("salary");
+         for (i = 0; i < options.length; i++) {
+          if (options[i].checked) {
+             urlencoded1.append("salary",options[i].value);
+            break;
+          }
+      }
+       
         urlencoded1.append("profileid", sessionStorage.getItem("proid"));
 
         var requestOptions1 = {

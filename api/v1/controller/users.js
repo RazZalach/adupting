@@ -16,7 +16,11 @@ const mongoose=require('mongoose');
 
     }
 module.exports={
-
+    delete_all_users:(req,res)=>{
+        users.deleteMany({}).then(()=>{
+            return res.status(200).json({msg:"delet all users!"})
+        })
+    },
                 get_all_users:(req,res)=>{
                     users.find().then((data)=>{
                         if(data.length > 0 ){
