@@ -1,25 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <link rel="stylesheet" href="/css/css/cprofile.css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <title>יצירת פרופיל</title>
-
-
-
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/css/loginwm.css">
+    <title>התחברות מנהל</title>
 </head>
-<body >
-  
-        {{>homepage}} 
-          {{>cprofiletemp}} 
-    {{>footertemp}}
 
+<body style="background-color: rgba(0, 255, 255, 0.418);">
+         {{>homepage}}  
       
-                                    
+  
+<div  class="container">
+    
+        <div  id="login-row" class="row justify-content-center align-items-center">
+            <div  id="login-column" class="col-md-6">
+                <div class="box">
+                    <div class="shape1"></div>
+                    <div class="shape2"></div>
+                    <div class="shape3"></div>
+                    <div class="shape4"></div>
+                    <div class="shape5"></div>
+                    <div class="shape6"></div>
+                    <div class="shape7"></div>
+                    <div class="float">
+                        <div class="form">
+                             <h4>התחברות מנהל</h4>
+                            <div class="form-group">
+                          
+                                <input type="email" name="username" id="email" class="form-control" placeholder="הכנס את המייל שלך">
+                            </div>
+                            <div class="form-group">
+                        
+                                <input type="password" name="password" id="pass" class="form-control" placeholder="הכנס את הסיסמא שלך">
+                            </div>
+                            <div class="form-group" style="margin-left:25% ;">
+                                <input type="button" onclick="login()" name="button" class="btn btn-info btn-md" value="התחבר">
+                            </div>
+                        </div>
+                        
+                
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+     <script src="/scripts/scripts/loginwm.js"></script>  
+
+<br><br><br><br>
+ 
+     {{>footertemp}}  
 </body>
 </html>

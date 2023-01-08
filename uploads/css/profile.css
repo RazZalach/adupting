@@ -1,4 +1,9 @@
 
+  .simButton button{
+    
+    margin-left: 65%;
+    margin-bottom: 20%;
+  }
   .sim{
     border: 4px solid rgb(0, 0, 0);
     border-radius: 8%;
